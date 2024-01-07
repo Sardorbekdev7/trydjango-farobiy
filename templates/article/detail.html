@@ -1,0 +1,28 @@
+{% extends '../base.html' %}
+{% block title %}
+    Try django detail
+{% endblock %}
+
+{% block header %}
+    <h1 class="fs-1 mt-3">Article detail</h1>
+{% endblock %}
+
+{% block content %}
+    <div>
+     {% block primary_link %}
+          {{ block.super }}
+          <span>Article detail</span>
+      {% endblock %}
+    </div>
+    <div class="mt-5">
+    {% if object_detail.image %}
+        <img height="200" src="{{ object_detail.image.url }}" alt="">
+    {% endif %}
+    <h1>{{ object_detail.title }}</h1>
+    <p>{{ object_detail.content }}</p>
+    <div>
+        <a class="btn btn-success" href="{% url 'article:change' object_detail.id %}">Edit</a>
+        <a class="btn btn-danger" href="{% url 'article:delete' object_detail.id %}">Delete</a>
+    </div>
+    </div>
+{% endblock %}

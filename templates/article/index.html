@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+    <h1 class="my-3">Article list</h1>
+{% endblock %}
+{% block content %}
+    <div>
+        <span class="fs-3 mb-5">{{ old_articles_list.count }} from {{ object_list.count }} object(s) found</span>
+    </div>
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Content</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in object_list %}
+                <tr>
+                    <th scope="row">{{ i.id }}</th>
+                    <th><a class="text-success text-decoration-none" href="{% url 'article:article_detail' i.slug %}">{{ i.title }}</a></th>
+                    <th>{{ i.content }}</th>
+                    <th><a class="btn btn-success" href="{% url 'article:change' i.id %}">Edit</a></th>
+                    <th><a class="btn btn-danger" href="{% url 'article:delete' i.id %}">Delete</a></th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if object_list.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ object_list.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+            </span>
+
+            {% if object_list.has_next %}
+                <a href="?page={{ object_list.next_page_number }}">next</a>
+                <a href="?page={{ object_list.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

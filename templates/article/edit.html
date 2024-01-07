@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Article edit{% endblock %}
+
+{% block header %}
+    <h1 class="mt-3">Edit article</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="mt-3">
+     {% block primary_link %}
+          {{ block.super }}
+          <span>Article edit</span>
+      {% endblock %}
+    </div>
+<div class="mt-3">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <pre>
+            <code>Modified date: {{ object.modified_at }}</code>
+            <code>Created date: {{ object.created_at }}</code>
+        </pre>
+        <button class="btn btn-secondary" type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Article Create{% endblock %}
+
+{% block header %}
+    <h1 class="mt-3">Create page</h1>
+{% endblock %}
+
+{% block content %}
+    <div>
+     {% block primary_link %}
+          {{ block.super }}
+          <span>Article create</span>
+      {% endblock %}
+    </div>
+    {% if created %}
+    <div>
+        <span>
+            <a href="{% url 'article:article_list' %}">Articles</a>
+        </span> /
+        <span>
+            <a href="{% url 'article:create' %}">+ add new one</a>
+        </span>
+    </div>
+        <h1>{{ object.title }}</h1>
+        <p>{{ object.content }}</p>
+    {% else %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <div>
+                <label for="title">Title</label>
+            </div>
+
+            <input class="form-control" name="title" placeholder="title" id="title">
+        </div>
+        <div>
+            <div>
+                <label for="content">Content</label>
+            </div>
+            <textarea class="form-control" name="content" id="content" placeholder="Content"></textarea>
+        </div>
+        <div>
+            <div>
+                <label for="image">Image</label>
+            </div>
+            <input class="form-control" type="file" name="image" id="image" placeholder="image">
+        </div>
+        <button type='submit' class="btn btn-primary mt-3">ADD</button>
+    </form>
+    {% endif %}
+
+{% endblock %}

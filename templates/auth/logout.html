@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ block.super }}
+    Logout
+{% endblock %}
+
+{% block header %}
+    <h1>Logout page</h1>
+
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-md-center">
+        <div class="col-md-6">
+            <h1>Are want to log out?</h1>
+        </div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, I want</button>
+        <a href="/" class="btn btn-primary">No, I don't want</a>
+    </form>
+    </div>
+{% endblock %}

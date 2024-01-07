@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Article Create with Form{% endblock %}
+
+{% block header %}
+    <h1>Article create form</h1>
+{% endblock %}
+
+{% block content %}
+    <div>
+     {% block primary_link %}
+          {{ block.super }}
+          <span>Article create form</span>
+      {% endblock %}
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary">Save</button>
+    </form>
+{% endblock %}

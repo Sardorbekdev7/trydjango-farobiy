@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Article detail{% endblock %}
+
+{% block header %}
+    <h1 class="mt-3">Article delete</h1>
+{% endblock %}
+
+{% block content %}
+    <div>
+     {% block primary_link %}
+          {{ block.super }}
+          <span>Article delete</span>
+      {% endblock %}
+    </div>
+
+<h2>Are you sure to delete "{{ object.title }}"</h2>
+<form class="mt-3" method="post">
+    {% csrf_token %}
+    <button class="btn btn-primary" type="submit">Delete</button>
+    <a class="btn btn-secondary" href="{% url 'article:article_list' %}">No, thanks</a>
+</form>
+{% endblock %}

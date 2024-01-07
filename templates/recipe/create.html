@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+	Recipe Create
+{% endblock %}
+
+{% block header %}
+    {% if header %}
+    	<h1>{{ header }}</h1>
+    {% else %}
+	    <h1>Recipe Create</h1>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% block primary_link %}
+        <span>
+            <a class="text-decoration-none text-primary " href="{% url 'recipe:list' %}">Recipes</a>
+        </span>/ Add New Create
+    {% endblock %}
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                  <div class="mb-3 row">
+                    <label for="recipe_title" class="col-sm-2 col-form-label">Title: </label>
+                    <div class="col-sm-10">
+                      {{ form.title }}
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label for="recipe_image" class="col-sm-2 col-form-label">Image: </label>
+                    <div class="col-sm-10">
+                      {{ form.image }}
+                    </div>
+                  </div>
+                <div class="mb-3 row">
+                    <label for="recipe_description" class="col-sm-2 col-form-label">Description: </label>
+                    <div class="col-sm-10">
+                      {{ form.description }}
+                    </div>
+                  </div>
+                <div class="mb-3 row">
+                    <label for="recipe_tags" class="col-sm-2 col-form-label">Tags: </label>
+                    <div class="col-sm-10">
+                      {{ form.tag }}
+                    </div>
+                  </div>
+                <div class="buttons d-flex gap-2 justify-content-end">
+                    <button class="btn btn-primary" type="submit">Save</button>
+                    <button class="btn btn-warning" type="reset">Reset fields</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
